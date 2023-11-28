@@ -9,9 +9,13 @@ const router = (app) => {
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
-  app.get('/witter', mid.requiresLogin, (req, res) => res.render('app'));
+  app.get('/witter', mid.requiresSecure, (req, res) => res.render('app'));
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+
+  app.get('/posts', mid.requiresSecure, controllers.Post.getPost);
+  app.get('/posts/:user', mid.requiresSecure, controllers.Post.getPost);
+  app.post('/post', mid.requiresLogin, controllers.Post.makePost);
 };
 
 module.exports = router;

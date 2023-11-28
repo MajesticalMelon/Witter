@@ -1,0 +1,48 @@
+const models = require('../models');
+
+const { Post } = models;
+
+const makePost = async (req, res) => {
+  if (!req.body.data) {
+    return res.status(400).json({ error: 'Cannot have an empty post!' });
+  }
+
+  const postData = {
+    user: req.session.account._id,
+    data: req.body.data,
+  };
+
+  try {
+    const newPost = new Post(postData);
+    await newPost.save();
+    return res.status(201).json({ user: newPost.user, post: newPost.data });
+  } catch (err) {
+    console.log(err);
+    if (err.code === 11000) {
+      return res.status(400).json({ error: 'Post already exists!' });
+    }
+    return res.status(500).json({ error: 'An error occured making a post!' });
+  }
+};
+
+const getPost = async (req, res) => {
+  try {
+    const query = { };
+
+    if (req.params.user) {
+      query.owner = req.params.user;
+    }
+
+    const docs = await Post.find(query).select('data createdDate likes').lean().exec();
+
+    return res.json({ posts: docs });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error retrieving posts!' });
+  }
+};
+
+module.exports = {
+  makePost,
+  getPost,
+};

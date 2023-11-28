@@ -19,8 +19,21 @@ html, body {
   letter-spacing: -0.02rem;
 }
 
-input, button {
+input, button, textarea {
   border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 2px;
+  margin-bottom: 2px;
+}
+
+#user, #pass, #pass2 {
+  text-align: center;
+  width: 180px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0px 0px 1px 1px var(--primary);
 }
 
 #logo {
@@ -114,22 +127,17 @@ nav:nth-child(1) {
   background-color: var(--dark-beige);
 }
 
-input {
-  font-size: 1.1rem;
-  padding: 2px;
-  margin-bottom: 2px;
-}
-
-#user, #pass, #pass2 {
-  text-align: center;
-  width: 180px;
-}
-
-#user:focus, #pass:focus, #pass2:focus {
-  outline: none;
-  box-shadow: 0px 0px 1px 1px var(--primary);
-}
-
 .hidden {
   display: none;
+}
+
+#makePost .mainForm {
+  padding-top: 20px;
+}
+
+#posts {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex: 1;
 }

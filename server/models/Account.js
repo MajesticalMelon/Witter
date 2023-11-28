@@ -37,20 +37,21 @@ const AccountSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  imageKeys: {
-    type: [String],
-  },
-  images: {
-    type: [String],
-  },
+  likedPosts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Post',
+      required: false,
+    },
+  ],
 });
 
 // Converts a doc to something we can store in redis later on.
 AccountSchema.statics.toAPI = (doc) => ({
   username: doc.username,
   _id: doc._id,
-  imageKeys: doc.imageKeys,
-  images: doc.images,
+  posts: doc.posts,
+  likedPosts: doc.likedPosts,
 });
 
 // Helper function to hash a password
