@@ -1,109 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+
+  --primary: #e25e0d;
+  --secondary: #ebe8e5;
+  --beige: #9a8879;
+  --dark-beige: #55473d;
+  --extra-dark-gray: #1e1712;
+  --black: #0a0705;
+  background-color: var(--extra-dark-gray);
+  color: var(--secondary);
+  font-family: 'Nanum Gothic', sans-serif;
+  letter-spacing: -0.02rem;
+}
+
+input, button {
+  border-radius: 5px;
 }
 
 #logo {
-    height: 40px;
-    width: 40;
-    padding-top: 5px;
-    float:left;
-    border-radius: 8px;
+  height: 40px;
+  width: 40;
+  padding-top: 5px;
+  float:left;
+  border-radius: 8px;
 }
 
 nav {
-    width: 100%;
-    height: 50px;
-    background-color: #55acee;
+  height: 50px;
+  width: 100%;
+  background-color: var(--primary);
 }
 
 nav:nth-child(1) {
-    padding-left: 25px;
+  padding-left: 25px;
 }
 
 .navlink {
-    padding: 5px;
-    padding-top: 12px;
-    padding-left: 20px;
-    color: white;
-    font-size: 1.3em;
-    float: left;
+  padding-top: 12px;
+  padding-left: 20px;
+  color: var(--secondary);
+  font-size: 1.3em;
+  float: left;
 }
 
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
-    color: white;
-    text-decoration: none;
-    padding: 5px;
-    border-radius: 4px;
-    background-color: #55acee;
-    transition: background-color 0.4s ease;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 4px;
+  color: var(--secondary);
+  background-color: var(--primary);
+  transition: background-color 0.4s ease;
 }
 
 .navlink a:hover {
-    transition: background-color 0.8s ease;
-    background-color: #66bdff;
+  transition: background-color 0.8s ease;
+  background-color: var(--extra-dark-gray);
 }
 
 .mainForm {
-    height: 300px;
-    width: 350px;
-    margin: 0 auto;
-    padding-top: 350px;
-    font-size: 1.2em;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 350px;
+  margin: 0 auto;
+  padding-top: 350px;
+  font-size: 1.2em;
+}
+
+.mainInput {
+  display: flex;
+  
 }
 
 .mainForm h3 {
-    text-align: center;
+  text-align: center;
 }
 
 .mainForm label {
-    display: inline-block;
-    width: 100px;
-    margin-right: 10px;
-    text-align: right;
-    font-size: 1.2em;
+  display: inline-block;
+  width: 120px;
+  margin-right: 10px;
+  text-align: right;
+  font-size: 1.2em;
 }
 
 .formSubmit {
-    transition: background-color 0.4s ease;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 14px;
-    font-size: 1.2em;
-    width: 100px;
-    background-color: #55acee;
-    border-radius: 2px;
-    border-color: #66acee;
-    padding: 3px 0px;
-    color: white;
-    text-decoration: none;
+  transition: background-color 0.4s ease;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 14px;
+  font-size: 1.2em;
+  width: 100px;
+  background-color: var(--primary);
+  border-color: var(--dark-beige);
+  padding: 3px 0px;
+  color: var(--secondary);
+  text-decoration: none;
 }
 
 .formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
+  color: var(--secondary);
 }
 
 .formSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+  transition: background-color 0.4s ease;
+  background-color: var(--dark-beige);
+}
+
+input {
+  font-size: 1.1rem;
+  padding: 2px;
+  margin-bottom: 2px;
 }
 
 #user, #pass, #pass2 {
-    text-align: center;
-    font-size: 1.1em;
-    width: 180px;
-    border-radius: 6px;
+  text-align: center;
+  width: 180px;
 }
 
 #user:focus, #pass:focus, #pass2:focus {
-    outline: none;
-    box-shadow: 0px 0px 1px 1px #55acee;
+  outline: none;
+  box-shadow: 0px 0px 1px 1px var(--primary);
 }
 
 .hidden {
-    display: none;
+  display: none;
 }

@@ -29,6 +29,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.33.2",
     "nodemon": "^2.0.21",
+    "prettier": "^3.1.0",
     "webpack": "^5.76.2",
     "webpack-cli": "^5.0.1"
   },
@@ -48,5 +49,12 @@
     "redis": "^4.6.5",
     "serve-favicon": "^2.5.0",
     "underscore": "^1.13.6"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "printWidth": 80
   }
 }

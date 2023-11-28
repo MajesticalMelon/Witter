@@ -9,9 +9,9 @@ const router = (app) => {
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
-  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/witter', mid.requiresLogin, (req, res) => res.render('app'));
 
-  app.get('/Witter', mid.requiresLogin, (req, res) => res.render('app'));
+  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 
 module.exports = router;

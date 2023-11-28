@@ -52,13 +52,17 @@ const LoginWindow = (props) => (
       className="mainForm"
       {...props}
     >
-      <label htmlFor="username">Username: </label>
-      <input id="user" type="text" name="username" placeholder="username" />
+      <div className="mainInput">
+        <label htmlFor="username">Username: </label>
+        <input id="user" type="text" name="username" placeholder="username" />
+      </div>
 
-      <label htmlFor="pass">Password: </label>
-      <input id="pass" type="password" name="pass" placeholder="password" />
+      <div className="mainInput">
+        <label htmlFor="pass">Password: </label>
+        <input id="pass" type="password" name="pass" placeholder="password" />
+      </div>
 
-      <input className="formSubmit" type="submit" value="Sign in" />
+      <input className="formSubmit mainInput" type="submit" value="Sign in" />
     </form>
 );
 
