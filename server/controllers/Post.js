@@ -8,7 +8,7 @@ const makePost = async (req, res) => {
   }
 
   const postData = {
-    user: req.session.account._id,
+    user: req.session.account,
     data: req.body.data,
   };
 
@@ -33,7 +33,8 @@ const getPost = async (req, res) => {
       query.owner = req.params.user;
     }
 
-    const docs = await Post.find(query).select('data createdDate likes').lean().exec();
+    const docs = await Post.find(query).populate('user').select('user data createdDate likes').lean()
+      .exec();
 
     return res.json({ posts: docs });
   } catch (err) {

@@ -59,9 +59,20 @@ const signup = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  try {
+    const docs = await Account.findById(req.params.id);
+    return res.json({ user: docs });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error retrieving posts!' });
+  }
+};
+
 module.exports = {
   loginPage,
   login,
   logout,
   signup,
+  getUser,
 };

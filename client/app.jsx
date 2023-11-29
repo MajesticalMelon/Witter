@@ -49,14 +49,12 @@ const PostWindow = (props) => (
 );
 
 const AllPosts = ({ posts, ...rest }) => <div style={{
-  display: 'flex', flexDirection: 'column', alignContent: 'center', overflowY: 'scroll', width: '800px',
+  display: 'flex', flexDirection: 'column', alignContent: 'center', width: '800px', overflow: 'hidden',
 }} {...rest}>
-    {posts.map((p, i) => (
-      <div key={i}>
-        <h3>{p.user}</h3>
+    {posts.map((p, i) => <div key={i} className='postCard'>
+        <h3>{p.user.username}</h3>
         <p>{p.data}</p>
-      </div>
-    ))}
+      </div>)}
   </div>;
 
 AllPosts.propTypes = {
