@@ -146,12 +146,21 @@ nav:nth-child(1) {
   margin: 8px;
   padding: 8px;
   border-radius: 8px;
+}
 
-  & h3, p {
-    margin: 0;
-  }
+.postTitle {
+  display: flex;
+  align-items: flex-end;
+}
 
-  & p {
-    margin-top: 8px;
-  }
+.postTitle .username, p {
+  margin: 0;
+}
+
+.postTitle .username {
+  margin-right: 4px;
+}
+
+.postData {
+  margin-top: 8px;
 }

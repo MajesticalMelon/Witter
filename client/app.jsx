@@ -14,9 +14,6 @@ const loadPostsFromServer = async () => {
 
 const handlePost = (e) => {
   e.preventDefault();
-
-  console.log('yep');
-
   const data = e.target.querySelector('#data').value;
 
   if (!data) {
@@ -52,8 +49,11 @@ const AllPosts = ({ posts, ...rest }) => <div style={{
   display: 'flex', flexDirection: 'column', alignContent: 'center', width: '800px', overflow: 'hidden',
 }} {...rest}>
     {posts.map((p, i) => <div key={i} className='postCard'>
-        <h3>{p.user.username}</h3>
-        <p>{p.data}</p>
+        <div className='postTitle'>
+          <a href={`/users/${p.user._id}`}><h3 className='username'>@{p.user.username}</h3></a>
+          <p>{p.createdDate}</p>
+        </div>
+        <p className='postData'>{p.data}</p>
       </div>)}
   </div>;
 
