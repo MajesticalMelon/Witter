@@ -1,8 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom/client');
-const helper = require('./helper.js');
 
-const makePostRoot = ReactDOM.createRoot(document.getElementById('makePost'));
 const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));
 
 const loadPostsFromServer = async () => {
@@ -11,39 +9,6 @@ const loadPostsFromServer = async () => {
 
   postsRoot.render(<AllPosts posts={data.posts} />);
 };
-
-const handlePost = (e) => {
-  e.preventDefault();
-  const data = e.target.querySelector('#data').value;
-
-  if (!data) {
-    helper.handleError('Username or password is empty!');
-    return false;
-  }
-
-  helper.sendPost(e.target.action, { data }).then(() => loadPostsFromServer());
-
-  return false;
-};
-
-const PostWindow = (props) => (
-  <form
-    id="postForm"
-    name="postForm"
-    onSubmit={handlePost}
-    action="/post"
-    method="POST"
-    className='mainForm'
-    {...props}
-  >
-    <div className="mainInput">
-      <label htmlFor="data">Post: </label>
-      <textarea id="data" type="text" name="data" placeholder="data" />
-    </div>
-
-    <input className="formSubmit mainInput" type="submit" value="Post" />
-  </form>
-);
 
 const AllPosts = ({ posts, ...rest }) => <div style={{
   display: 'flex', flexDirection: 'column', alignContent: 'center', width: '800px', overflow: 'hidden',
@@ -62,7 +27,6 @@ AllPosts.propTypes = {
 };
 
 const init = () => {
-  makePostRoot.render(<PostWindow />);
   postsRoot.render(<AllPosts posts={[]} />);
 
   loadPostsFromServer();

@@ -7,7 +7,7 @@ const userPage = (req, res) => res.render('user');
 
 const logout = (req, res) => {
   req.session.destroy();
-  res.redirect('/');
+  res.redirect('/login');
 };
 
 const login = (req, res) => {
@@ -66,7 +66,7 @@ const getUser = async (req, res) => {
     return res.json({ user: docs });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: 'Error retrieving posts!' });
+    return res.status(500).json({ error: 'Error retrieving user!' });
   }
 };
 

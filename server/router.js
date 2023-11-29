@@ -11,14 +11,20 @@ const router = (app) => {
 
   app.get('/witter', mid.requiresSecure, (req, res) => res.render('app'));
 
-  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/', mid.requiresSecure, (req, res) => res.render('app'));
 
   app.get('/posts', mid.requiresSecure, controllers.Post.getPost);
   app.get('/posts/:user', mid.requiresSecure, controllers.Post.getPost);
   app.post('/post', mid.requiresLogin, controllers.Post.makePost);
 
   app.get('/user/:id', mid.requiresSecure, controllers.Account.getUser);
-  app.get('/users/:id', mid.requiresSecure, controllers.Account.userPage);
+  app.get('/users/:id', mid.requiresSecure, (req, res) => {
+    if (req.session.account && req.params.id === req.session.account._id) {
+      return res.redirect('/account');
+    }
+    return controllers.Account.userPage(req, res);
+  });
+  app.get('/account', mid.requiresSecure, mid.requiresLogin, controllers.Account.userPage);
 };
 
 module.exports = router;
