@@ -10,8 +10,14 @@ const loadPostsFromServer = async () => {
   postsRoot.render(<AllPosts posts={data.posts} />);
 };
 
-const AllPosts = ({ posts, ...rest }) => <div style={{
-  display: 'flex', flexDirection: 'column', alignContent: 'center', width: '800px', overflow: 'hidden',
+const AllPosts = ({ posts, ...rest }) => <div id='postsHolder' style={{
+  display: 'flex',
+  flexDirection: 'column',
+  alignContent: 'center',
+  width: '800px',
+  backgroundColor: 'var(--beige)',
+  borderRadius: '8px',
+  marginTop: '16px',
 }} {...rest}>
     {posts.map((p, i) => <div key={i} className='postCard'>
         <div className='postTitle'>
