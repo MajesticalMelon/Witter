@@ -1,30 +1,32 @@
-const controllers = require('./controllers');
-const mid = require('./middleware');
+import {
+  loginPage, login, signup, getPost, getUser, makePost, userPage, logout,
+} from './controllers/index.js';
+import { requiresLogin, requiresLogout, requiresSecure } from './middleware/index.js';
 
 const router = (app) => {
-  app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
-  app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
+  app.get('/login', requiresSecure, requiresLogout, loginPage);
+  app.post('/login', requiresSecure, requiresLogout, login);
 
-  app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
+  app.post('/signup', requiresSecure, requiresLogout, signup);
 
-  app.get('/logout', mid.requiresLogin, controllers.Account.logout);
+  app.get('/logout', requiresLogin, logout);
 
-  app.get('/witter', mid.requiresSecure, (req, res) => res.render('app'));
+  app.get('/witter', requiresSecure, (req, res) => res.render('app'));
 
-  app.get('/', mid.requiresSecure, (req, res) => res.render('app'));
+  app.get('/', requiresSecure, (req, res) => res.render('app'));
 
-  app.get('/posts', mid.requiresSecure, controllers.Post.getPost);
-  app.get('/posts/:user', mid.requiresSecure, controllers.Post.getPost);
-  app.post('/post', mid.requiresLogin, controllers.Post.makePost);
+  app.get('/posts', requiresSecure, getPost);
+  app.get('/posts/:user', requiresSecure, getPost);
+  app.post('/post', requiresLogin, makePost);
 
-  app.get('/user/:id', mid.requiresSecure, controllers.Account.getUser);
-  app.get('/users/:id', mid.requiresSecure, (req, res) => {
+  app.get('/user/:id', requiresSecure, getUser);
+  app.get('/users/:id', requiresSecure, (req, res) => {
     if (req.session.account && req.params.id === req.session.account._id) {
       return res.redirect('/account');
     }
-    return controllers.Account.userPage(req, res);
+    return userPage(req, res);
   });
-  app.get('/account', mid.requiresSecure, mid.requiresLogin, controllers.Account.userPage);
+  app.get('/account', requiresSecure, requiresLogin, userPage);
 };
 
-module.exports = router;
+export default router;

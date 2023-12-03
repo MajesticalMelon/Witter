@@ -1,6 +1,6 @@
-const React = require('react');
-const ReactDOM = require('react-dom/client');
-const helper = require('./helper.js');
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as helper from './helper';
 
 const makePostRoot = ReactDOM.createRoot(document.getElementById('makePost'));
 const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));

@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-let PostModel = {};
+import * as mongoose from 'mongoose';
 
 const PostSchema = new mongoose.Schema({
   user: {
@@ -26,5 +24,5 @@ PostSchema.statics.toAPI = (doc) => ({
   createdDate: doc.createdDate,
 });
 
-PostModel = mongoose.model('Post', PostSchema);
-module.exports = PostModel;
+const PostModel = mongoose.model('Post', PostSchema);
+export default PostModel;

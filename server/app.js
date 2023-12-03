@@ -1,17 +1,21 @@
-require('dotenv').config();
-const path = require('path');
-const express = require('express');
-const compression = require('compression');
-const favicon = require('serve-favicon');
-const bodyparser = require('body-parser');
-const mongoose = require('mongoose');
-const expressHandlebars = require('express-handlebars');
-const helmet = require('helmet');
-const session = require('express-session');
-const RedisStore = require('connect-redis').default;
-const redis = require('redis');
+import { config } from 'dotenv';
+import * as path from 'path';
+import compression from 'compression';
+import favicon from 'serve-favicon';
+import bodyparser from 'body-parser';
+import * as mongoose from 'mongoose';
+import * as expressHandlebars from 'express-handlebars';
+import helmet from 'helmet';
+import session from 'express-session';
+import RedisStore from 'connect-redis';
+import * as redis from 'redis';
+import express from 'express';
+import { fileURLToPath } from 'url';
+import router from './router.js';
 
-const router = require('./router.js');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+config();
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
@@ -57,6 +61,8 @@ redisClient.connect().then(() => {
 
   app.listen(port, (err) => {
     if (err) throw err;
+    console.log(__dirname);
+
     console.log(`listening on port ${port}`);
   });
 });

@@ -1,16 +1,14 @@
-const models = require('../models');
+import { Account } from '../models/index.js';
 
-const { Account } = models;
+export const loginPage = (req, res) => res.render('login');
+export const userPage = (req, res) => res.render('user');
 
-const loginPage = (req, res) => res.render('login');
-const userPage = (req, res) => res.render('user');
-
-const logout = (req, res) => {
+export const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/login');
 };
 
-const login = (req, res) => {
+export const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
 
@@ -29,7 +27,7 @@ const login = (req, res) => {
   });
 };
 
-const signup = async (req, res) => {
+export const signup = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
   const pass2 = `${req.body.pass2}`;
@@ -60,7 +58,7 @@ const signup = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+export const getUser = async (req, res) => {
   try {
     const docs = await Account.findById(req.params.id);
     return res.json({ user: docs });
@@ -68,13 +66,4 @@ const getUser = async (req, res) => {
     console.log(err);
     return res.status(500).json({ error: 'Error retrieving user!' });
   }
-};
-
-module.exports = {
-  loginPage,
-  login,
-  logout,
-  signup,
-  getUser,
-  userPage,
 };

@@ -1,2 +1,2 @@
-module.exports.Account = require('./Account.js');
-module.exports.Post = require('./Post.js');
+export * from './Account.js';
+export * from './Post.js';

@@ -1,8 +1,6 @@
-const models = require('../models');
+import { Post } from '../models/index.js';
 
-const { Post } = models;
-
-const makePost = async (req, res) => {
+export const makePost = async (req, res) => {
   if (!req.body.data) {
     return res.status(400).json({ error: 'Cannot have an empty post!' });
   }
@@ -25,7 +23,7 @@ const makePost = async (req, res) => {
   }
 };
 
-const getPost = async (req, res) => {
+export const getPost = async (req, res) => {
   try {
     const query = { };
 
@@ -41,9 +39,4 @@ const getPost = async (req, res) => {
     console.log(err);
     return res.status(500).json({ error: 'Error retrieving posts!' });
   }
-};
-
-module.exports = {
-  makePost,
-  getPost,
 };

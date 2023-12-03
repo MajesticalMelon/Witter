@@ -6,5 +6,6 @@
     "import/extensions": "off",
     "linebreak-style": "off"
   },
-  "env": {"browser": true, "es6": true}
+  "env": {"browser": true, "es6": true},
+  "parser": "@babel/eslint-parser"
 }

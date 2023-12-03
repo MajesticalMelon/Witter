@@ -4,8 +4,8 @@
    standard tool for encrypting passwords. Mongoose is our tool for
    interacting with our mongo database.
 */
-const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
+import * as bcrypt from 'bcrypt';
+import * as mongoose from 'mongoose';
 
 /* When generating a password hash, bcrypt (and most other password hash
    functions) use a "salt". The salt is simply extra data that gets hashed
@@ -14,7 +14,7 @@ const mongoose = require('mongoose');
    essentially defines the number of times we will hash the password and salt.
 */
 const saltRounds = 10;
-
+// eslint-disable-next-line import/no-mutable-exports
 let AccountModel = {};
 
 /* Our schema defines the data we will store. A username (string of alphanumeric
@@ -82,4 +82,4 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
 };
 
 AccountModel = mongoose.model('Account', AccountSchema);
-module.exports = AccountModel;
+export default AccountModel;

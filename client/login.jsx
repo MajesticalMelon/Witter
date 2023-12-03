@@ -1,6 +1,6 @@
-const React = require('react');
-const ReactDOM = require('react-dom/client');
-const helper = require('./helper.js');
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as helper from './helper';
 
 const contentRoot = ReactDOM.createRoot(document.getElementById('content'));
 

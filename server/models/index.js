@@ -1,2 +1,2 @@
-module.exports.Account = require('./Account.js');
-module.exports.Post = require('./Post.js');
+export { default as Post } from './Post.js';
+export { default as Account } from './Account.js';
