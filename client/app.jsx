@@ -11,7 +11,7 @@ const loadPostsFromServer = async () => {
   const response = await fetch('/posts');
   const data = await response.json();
   postsRoot.render(<AllPosts posts={data.posts} />);
-  navRoot.render(<Nav isSignedIn={data.loggedIn} />);
+  navRoot.render(<Nav isSignedIn={!!data.user} />);
 };
 
 const init = () => {

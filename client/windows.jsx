@@ -135,16 +135,25 @@ PostWindow.propTypes = {
   callback: () => null,
 };
 
-export const AllPosts = ({ posts, ...rest }) => <div id='postsHolder' {...rest}>
-    {posts.map((p, i) => <div key={i} className='postCard'>
+export const AllPosts = ({ posts, userId, ...rest }) => <div id='postsHolder' {...rest}>
+    {posts.filter((p) => {
+      if (userId) {
+        return p.user._id === userId;
+      }
+      return true;
+    }).map((p, i) => {
+      const d = new Date(p.createdDate);
+      return <div key={i} className='postCard'>
         <div className='postTitle'>
           <a href={`/users/${p.user._id}`}><h3 className='username'>@{p.user.username}</h3></a>
-          <p>{p.createdDate}</p>
+          <p>{d.toLocaleDateString('en-us')}</p>
         </div>
         <p className='postData'>{p.data}</p>
-      </div>)}
+      </div>;
+    })}
   </div>;
 
 AllPosts.propTypes = {
   posts: [],
+  userId: '',
 };

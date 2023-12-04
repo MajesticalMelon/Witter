@@ -34,7 +34,7 @@ export const getPost = async (req, res) => {
     const docs = await Post.find(query).populate('user').select('user data createdDate likes').lean()
       .exec();
 
-    return res.json({ posts: docs, loggedIn: !!req.session.account });
+    return res.json({ posts: docs, user: req.session.account });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Error retrieving posts!' });

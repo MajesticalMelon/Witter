@@ -10,9 +10,14 @@ const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));
 const loadPostsFromServer = async () => {
   const response = await fetch('/posts');
   const data = await response.json();
-
-  postsRoot.render(<AllPosts posts={data.posts} />);
-  navRoot.render(<Nav isSignedIn={data.loggedIn} />);
+  console.log(window.location);
+  if (window.location.pathname === '/account') {
+    postsRoot.render(<AllPosts posts={data.posts} userId={data.user._id} />);
+  } else {
+    const id = window.location.pathname.split('/').at(-1);
+    postsRoot.render(<AllPosts posts={data.posts} userId={id} />);
+  }
+  navRoot.render(<Nav isSignedIn={!!data.user} />);
 };
 
 const init = () => {
