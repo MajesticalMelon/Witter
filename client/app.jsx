@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as MdIcon from 'react-icons/md';
+import Nav from './nav.jsx';
 
+const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
 const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));
+const makePostRoot = ReactDOM.createRoot(document.getElementById('makePost'));
 
 const loadPostsFromServer = async () => {
   const response = await fetch('/posts');
@@ -24,7 +26,6 @@ const AllPosts = ({ posts, ...rest }) => <div id='postsHolder' style={{
         <div className='postTitle'>
           <a href={`/users/${p.user._id}`}><h3 className='username'>@{p.user.username}</h3></a>
           <p>{p.createdDate}</p>
-          <MdIcon.MdLogin />
         </div>
         <p className='postData'>{p.data}</p>
       </div>)}
@@ -35,6 +36,7 @@ AllPosts.propTypes = {
 };
 
 const init = () => {
+  navRoot.render(<Nav isSignedIn={true} />);
   postsRoot.render(<AllPosts posts={[]} />);
 
   loadPostsFromServer();

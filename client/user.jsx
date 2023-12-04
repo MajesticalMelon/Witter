@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as helper from './helper';
+import Nav from './nav.jsx';
+import { PostWindow } from './windows.jsx';
 
+const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
 const makePostRoot = ReactDOM.createRoot(document.getElementById('makePost'));
 const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));
 
@@ -12,41 +14,8 @@ const loadPostsFromServer = async () => {
   postsRoot.render(<AllPosts posts={data.posts} />);
 };
 
-const handlePost = (e) => {
-  e.preventDefault();
-  const data = e.target.querySelector('#data').value;
-
-  if (!data) {
-    helper.handleError('Username or password is empty!');
-    return false;
-  }
-
-  helper.sendPost(e.target.action, { data }).then(() => loadPostsFromServer());
-
-  return false;
-};
-
-const PostWindow = (props) => (
-  <form
-    id="postForm"
-    name="postForm"
-    onSubmit={handlePost}
-    action="/post"
-    method="POST"
-    className='mainForm'
-    {...props}
-  >
-    <div className="mainInput">
-      <label htmlFor="data">Post: </label>
-      <textarea id="data" type="text" name="data" placeholder="data" />
-    </div>
-
-    <input className="formSubmit mainInput" type="submit" value="Post" />
-  </form>
-);
-
 const AllPosts = ({ posts, ...rest }) => <div style={{
-  display: 'flex', flexDirection: 'column', alignContent: 'center', width: '800px', overflow: 'hidden',
+  display: 'flex', flexDirection: 'column', alignContent: 'center', width: '800px',
 }} {...rest}>
     {posts.map((p, i) => <div key={i} className='postCard'>
         <div className='postTitle'>
@@ -62,8 +31,10 @@ AllPosts.propTypes = {
 };
 
 const init = () => {
+  navRoot.render(<Nav />);
+
   if (window.location.pathname === '/account') {
-    makePostRoot.render(<PostWindow />);
+    makePostRoot.render(<PostWindow callback={loadPostsFromServer} />);
   }
   postsRoot.render(<AllPosts posts={[]} />);
 

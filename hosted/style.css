@@ -40,15 +40,7 @@ input:focus, textarea:focus {
   box-shadow: 0px 0px 1px 1px var(--primary);
 }
 
-#logo {
-  height: 40px;
-  width: 40;
-  padding-top: 5px;
-  float:left;
-  border-radius: 8px;
-}
-
-nav {
+#navBar {
   width: 50px;
   height: 100%;
   position: fixed;
@@ -57,16 +49,38 @@ nav {
   background-color: var(--primary);
   overflow-x: hidden;
   border-right: var(--dark-beige) 2px solid;
-  align-items: center;
+  align-items: flex-start;
   transition: all 0.5s;
-  gap: 8px;
+  padding-left: 8px;
 }
 
-nav:hover {
-  width: 100px;
+#navLogo {
+  height: 40px;
+  width: 40;
+  padding-top: 5px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  align-self: center;
+}
+
+.navText {
+  display: none;
+  padding-right: 4px;
+}
+
+.navIcon {
+  padding-right: 8px;
+}
+
+#navBar:hover {
+  width: 150px;
 
   & .navlink {
     width: auto;
+  }
+
+  & .navText {
+    display: block;
   }
 }
 
@@ -79,33 +93,42 @@ nav:hover {
   width: 30px;
 }
 
-.navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
+.navButton, .navButton:link, .navButton:visited, .navButton:hover, .navButton:active {
+  display: flex;
+  align-items: center;
+  height: 24px;
   text-decoration: none;
-  padding: 5px;
+  padding: 4px;
   border-radius: 6px;
   color: var(--secondary);
   background-color: var(--primary);
   transition: background-color 0.4s ease;
 }
 
-.navlink a:hover {
+.navButton:hover {
   transition: background-color 0.8s ease;
   background-color: var(--extra-dark-gray);
 }
 
+#content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .mainForm {
   display: flex;
   flex-direction: column;
-  height: 300px;
-  width: 400px;
-  margin: 0 auto;
-  padding-top: 350px;
   font-size: 1.2em;
+  align-items: center;
 }
 
 .mainInput {
   display: flex;
-  
 }
 
 .mainForm h3 {
@@ -123,7 +146,6 @@ nav:hover {
   transition: background-color 0.4s ease;
   display: block;
   text-align: center;
-  margin: 0 auto;
   margin-top: 14px;
   font-size: 1.2em;
   width: 100px;
@@ -145,6 +167,11 @@ nav:hover {
 
 .hidden {
   display: none;
+}
+
+#makePost {
+  position: absolute;
+  right: 16px;
 }
 
 #makePost .mainForm {

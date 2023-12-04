@@ -7,6 +7,7 @@ const router = (app) => {
   app.get('/login', requiresSecure, requiresLogout, loginPage);
   app.post('/login', requiresSecure, requiresLogout, login);
 
+  app.get('/signup', requiresSecure, requiresLogout, loginPage);
   app.post('/signup', requiresSecure, requiresLogout, signup);
 
   app.get('/logout', requiresLogin, logout);
