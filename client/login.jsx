@@ -16,12 +16,11 @@ MainWindow.propTypes = {
 };
 
 const init = () => {
-  console.log(window.location.href);
-  navRoot.render(<Nav />);
-  if (window.location.pathname === '/login') {
-    contentRoot.render(<MainWindow><LoginWindow /></MainWindow>);
-  } else if (window.location.pathname === '/signup') {
+  navRoot.render(<Nav isSignedIn={false} />);
+  if (window.location.pathname === '/signup') {
     contentRoot.render(<MainWindow><SignupWindow /></MainWindow>);
+  } else {
+    contentRoot.render(<MainWindow><LoginWindow /></MainWindow>);
   }
 };
 

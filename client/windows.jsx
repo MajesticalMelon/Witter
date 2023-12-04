@@ -60,6 +60,8 @@ export const LoginWindow = (props) => (
       </div>
 
       <input className="formSubmit" type="submit" value="Sign in" />
+
+      <p id="errorMessage"></p>
     </form>
 );
 
@@ -89,6 +91,8 @@ export const SignupWindow = (props) => (
     </div>
 
     <input className="formSubmit mainInput" type="submit" value="Sign up" />
+
+    <p id="errorMessage"></p>
   </form>
 );
 
@@ -122,9 +126,25 @@ export const PostWindow = ({ callback, ...rest }) => (
     </div>
 
     <input className="formSubmit mainInput" type="submit" value="Post" />
+
+    <p id="errorMessage"></p>
   </form>
 );
 
 PostWindow.propTypes = {
   callback: () => null,
+};
+
+export const AllPosts = ({ posts, ...rest }) => <div id='postsHolder' {...rest}>
+    {posts.map((p, i) => <div key={i} className='postCard'>
+        <div className='postTitle'>
+          <a href={`/users/${p.user._id}`}><h3 className='username'>@{p.user.username}</h3></a>
+          <p>{p.createdDate}</p>
+        </div>
+        <p className='postData'>{p.data}</p>
+      </div>)}
+  </div>;
+
+AllPosts.propTypes = {
+  posts: [],
 };

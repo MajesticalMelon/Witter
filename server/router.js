@@ -14,7 +14,7 @@ const router = (app) => {
 
   app.get('/witter', requiresSecure, (req, res) => res.render('app'));
 
-  app.get('/', requiresSecure, (req, res) => res.render('app'));
+  app.get('/', requiresSecure, (req, res) => res.render('login'));
 
   app.get('/posts', requiresSecure, getPost);
   app.get('/posts/:user', requiresSecure, getPost);

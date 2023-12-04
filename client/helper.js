@@ -1,5 +1,7 @@
 export const handleError = (err) => {
-  console.error(err);
+  console.log(err);
+  const error = document.getElementById('errorMessage');
+  error.innerText = err;
 };
 
 /* Sends post requests to the server using fetch. Will look for various

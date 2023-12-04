@@ -171,24 +171,46 @@ input:focus, textarea:focus {
 
 #makePost {
   position: absolute;
-  right: 16px;
+  top: 16px;
+  right: 32px;
+  background-color: var(--dark-beige);
+  padding: 8px;
+  border-radius: 6px;
 }
 
-#makePost .mainForm {
-  padding-top: 20px;
+#makePost .mainInput label {
+  width: 50px;
 }
 
 #posts {
   display: flex;
   justify-content: center;
   flex: 1;
+  overflow: hidden;
+}
+
+#postsHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  overflow-y: scroll;
+  gap: 8px;
+  background-color: var(--beige);
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .postCard {
   background-color: var(--dark-beige);
-  margin: 8px;
   padding: 8px;
   border-radius: 8px;
+  width: 80%;
 }
 
 .postTitle {

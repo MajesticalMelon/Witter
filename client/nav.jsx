@@ -37,7 +37,6 @@ const Nav = ({ isSignedIn }) => <div id="navBar"><a href="/witter"><img id="navL
 
 Nav.propTypes = {
   isSignedIn: false,
-  isLoginWindow: false,
 };
 
 export default Nav;
