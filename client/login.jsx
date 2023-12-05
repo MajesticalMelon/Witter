@@ -6,7 +6,7 @@ import { LoginWindow, SignupWindow } from './windows.jsx';
 const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
 const formsRoot = ReactDOM.createRoot(document.getElementById('forms'));
 
-const MainWindow = ({ children }) => <div>
+const MainWindow = ({ children }) => <div id="mainWindow">
   <img id="mainLogo" src="/assets/img/witter.png" alt="Witter logo" />
   {children}
 </div>;

@@ -15,17 +15,21 @@ const loadPostsFromServer = async () => {
     },
   });
   const data = await response.json();
-  const userResponse = await fetch(`/user/${data.user._id}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const userData = await userResponse.json();
+  let likedPosts = [];
+  if (data.user) {
+    const userResponse = await fetch(`/user/${data.user._id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const userData = await userResponse.json();
+    likedPosts = userData.user.likedPosts;
+  }
   postsRoot.render(
     <AllPosts
       posts={data.posts}
-      likedPosts={userData.user.likedPosts}
+      likedPosts={likedPosts}
       callback={loadPostsFromServer}
     />,
   );

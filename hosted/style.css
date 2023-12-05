@@ -120,6 +120,12 @@ input:focus, textarea:focus {
   justify-content: center;
 }
 
+#mainWindow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 .mainForm {
   display: flex;
@@ -192,8 +198,16 @@ input:focus, textarea:focus {
   border-radius: 6px;
 }
 
-#makePost .mainInput label {
-  width: 50px;
+#makePost .postInput {
+  display: flex;
+  width: 100%;
+  height: 100px;
+}
+
+#makePost textarea {
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 #posts {
@@ -228,6 +242,10 @@ input:focus, textarea:focus {
   height: auto;
 }
 
+.userLink, .userLink:link, .userLink:visited, .userLink:hover, .userLink:active {
+  color: var(--secondary);
+}
+
 .postTitle {
   display: flex;
   align-items: flex-end;
@@ -242,6 +260,10 @@ input:focus, textarea:focus {
 }
 
 .postData {
+  border: var(--beige) 1px solid;
+  border-radius: 4px;
+  background-color: #1e171244;
+  padding: 8px;
   margin-top: 8px;
   word-wrap: break-word;
 }

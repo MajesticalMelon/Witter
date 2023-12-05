@@ -11,7 +11,7 @@ const Nav = ({ isSignedIn }) => <div id="navBar"><a href="/witter"><img id="navL
     </a>
   </div> : <></>}
   {!isSignedIn ? <div className="navlink"><a id="signupButton" className="navButton" href="/signup">
-      <div id="signupIcon" className='navIcon'><MdIcon.MdLogin/></div>
+      <div id="signupIcon" className='navIcon'><MdIcon.MdOutlineFileUpload/></div>
       <div className="navText">
         Sign up
       </div>

@@ -106,7 +106,7 @@ const handlePost = (e, callback) => {
   const data = e.target.querySelector('#data').value;
 
   if (!data) {
-    helper.handleError('User cannot make a post without logging in');
+    helper.handleError('Cannot make a post without logging in');
     return false;
   }
 
@@ -125,8 +125,7 @@ export const PostWindow = ({ callback, ...rest }) => (
     className='mainForm'
     {...rest}
   >
-    <div className="mainInput">
-      <label htmlFor="data">Post: </label>
+    <div className="mainInput postInput">
       <textarea id="data" type="text" name="data" placeholder="data" />
     </div>
 
@@ -154,7 +153,7 @@ export const AllPosts = ({
       const d = new Date(p.createdDate);
       return <div key={i} className='postCard'>
         <div className='postTitle'>
-          <a href={`/users/${p.user._id}`}><h3 className='username'>@{p.user.username}</h3></a>
+          <a className='userLink' href={`/users/${p.user._id}`}><p className='username'>@{p.user.username}</p></a>
           <p>{d.toLocaleDateString('en-us')}</p>
         </div>
         <p className='postData'>{p.data}</p>

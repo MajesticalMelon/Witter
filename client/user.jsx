@@ -10,16 +10,32 @@ const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));
 const loadPostsFromServer = async () => {
   const response = await fetch('/posts');
   const data = await response.json();
-  console.log(window.location);
+  let likedPosts = [];
+  if (data.user) {
+    const userResponse = await fetch(`/user/${data.user._id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const userData = await userResponse.json();
+    likedPosts = userData.user.likedPosts;
+  }
   if (window.location.pathname === '/account') {
     postsRoot.render(<AllPosts
       posts={data.posts}
       userId={data.user._id}
+      likedPosts={likedPosts}
       callback={loadPostsFromServer}
     />);
   } else {
     const id = window.location.pathname.split('/').at(-1);
-    postsRoot.render(<AllPosts posts={data.posts} userId={id} callback={loadPostsFromServer} />);
+    postsRoot.render(<AllPosts
+      posts={data.posts}
+      userId={id}
+      likedPosts={likedPosts}
+      callback={loadPostsFromServer}
+    />);
   }
   navRoot.render(<Nav isSignedIn={!!data.user} />);
   const postButton = document.getElementById('postButton');
