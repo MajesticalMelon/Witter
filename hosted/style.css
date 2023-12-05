@@ -182,10 +182,11 @@ input:focus, textarea:focus {
 }
 
 #content {
-  width: 100%;
+  width: calc(100% - 60px);
   display: grid;
   grid-template-columns: 1fr 700px 1fr;
   margin: 16px;
+  margin-left: 60px;
   gap: 16px;
   margin-bottom: 0;
 

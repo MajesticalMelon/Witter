@@ -6,6 +6,7 @@ import { PostWindow, AllPosts } from './windows.jsx';
 const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
 const makePostRoot = ReactDOM.createRoot(document.getElementById('makePost'));
 const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));
+const userInfoRoot = ReactDOM.createRoot(document.getElementById('userInfo'));
 
 const loadPostsFromServer = async () => {
   const response = await fetch('/posts');
@@ -42,8 +43,15 @@ const loadPostsFromServer = async () => {
   postButton.style.disabled = !!data.user;
 };
 
+const UserInfo = () => <div>User Info</div>;
+
 const init = () => {
-  makePostRoot.render(<PostWindow callback={loadPostsFromServer} />);
+  userInfoRoot.render(<UserInfo />);
+  if (window.location.pathname === '/account') {
+    makePostRoot.render(<PostWindow callback={loadPostsFromServer} />);
+  } else {
+    document.getElementById('makePost').style.backgroundColor = 'transparent';
+  }
   postsRoot.render(<AllPosts posts={[]} />);
 
   loadPostsFromServer();
