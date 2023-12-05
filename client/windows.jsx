@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FaRegHeart } from 'react-icons/fa';
 import * as helper from './helper.js';
 
 const handleLogin = (e) => {
@@ -61,7 +62,9 @@ export const LoginWindow = (props) => (
 
       <input className="formSubmit" type="submit" value="Sign in" />
 
-      <p id="errorMessage"></p>
+      <div id="errorHolder">
+        <p id="errorMessage"></p>
+      </div>
     </form>
 );
 
@@ -92,7 +95,9 @@ export const SignupWindow = (props) => (
 
     <input className="formSubmit mainInput" type="submit" value="Sign up" />
 
-    <p id="errorMessage"></p>
+    <div id="errorHolder">
+      <p id="errorMessage"></p>
+    </div>
   </form>
 );
 
@@ -101,7 +106,7 @@ const handlePost = (e, callback) => {
   const data = e.target.querySelector('#data').value;
 
   if (!data) {
-    helper.handleError('Username or password is empty!');
+    helper.handleError('User cannot make a post without logging in');
     return false;
   }
 
@@ -125,9 +130,11 @@ export const PostWindow = ({ callback, ...rest }) => (
       <textarea id="data" type="text" name="data" placeholder="data" />
     </div>
 
-    <input className="formSubmit mainInput" type="submit" value="Post" />
+    <input id="postButton" className="formSubmit mainInput" type="submit" value="Post" />
 
-    <p id="errorMessage"></p>
+    <div id="errorHolder">
+      <p id="errorMessage"></p>
+    </div>
   </form>
 );
 
@@ -149,6 +156,9 @@ export const AllPosts = ({ posts, userId, ...rest }) => <div id='postsHolder' {.
           <p>{d.toLocaleDateString('en-us')}</p>
         </div>
         <p className='postData'>{p.data}</p>
+        <div className='likButton'>
+          <FaRegHeart size={24} cursor='pointer' style={{ float: 'right' }} />
+        </div>
       </div>;
     })}
   </div>;

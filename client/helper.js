@@ -1,5 +1,5 @@
 export const handleError = (err) => {
-  console.log(err);
+  console.error(err);
   const error = document.getElementById('errorMessage');
   error.innerText = err;
 };
@@ -22,8 +22,10 @@ export const sendPost = async (url, data, handler) => {
     window.location = result.redirect;
   }
 
-  if (result.error) {
+  if (result.error || response.error) {
     handleError(result.error);
+  } else {
+    document.getElementById('errorMessage').innerText = '';
   }
 
   if (handler) {

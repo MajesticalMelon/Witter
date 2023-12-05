@@ -18,12 +18,12 @@ const loadPostsFromServer = async () => {
     postsRoot.render(<AllPosts posts={data.posts} userId={id} />);
   }
   navRoot.render(<Nav isSignedIn={!!data.user} />);
+  const postButton = document.getElementById('postButton');
+  postButton.style.disabled = !!data.user;
 };
 
 const init = () => {
-  if (window.location.pathname === '/account') {
-    makePostRoot.render(<PostWindow callback={loadPostsFromServer} />);
-  }
+  makePostRoot.render(<PostWindow callback={loadPostsFromServer} />);
   postsRoot.render(<AllPosts posts={[]} />);
 
   loadPostsFromServer();

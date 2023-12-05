@@ -4,7 +4,7 @@ import Nav from './nav.jsx';
 import { LoginWindow, SignupWindow } from './windows.jsx';
 
 const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
-const contentRoot = ReactDOM.createRoot(document.getElementById('content'));
+const formsRoot = ReactDOM.createRoot(document.getElementById('forms'));
 
 const MainWindow = ({ children }) => <div>
   <img id="mainLogo" src="/assets/img/witter.png" alt="Witter logo" />
@@ -18,9 +18,9 @@ MainWindow.propTypes = {
 const init = () => {
   navRoot.render(<Nav isSignedIn={false} />);
   if (window.location.pathname === '/signup') {
-    contentRoot.render(<MainWindow><SignupWindow /></MainWindow>);
+    formsRoot.render(<MainWindow><SignupWindow /></MainWindow>);
   } else {
-    contentRoot.render(<MainWindow><LoginWindow /></MainWindow>);
+    formsRoot.render(<MainWindow><LoginWindow /></MainWindow>);
   }
 };
 
