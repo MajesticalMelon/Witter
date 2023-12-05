@@ -1,5 +1,5 @@
 import {
-  loginPage, login, signup, getPost, getUser, makePost, userPage, logout,
+  loginPage, login, signup, getPost, getUser, makePost, userPage, logout, likePost,
 } from './controllers/index.js';
 import { requiresLogin, requiresLogout, requiresSecure } from './middleware/index.js';
 
@@ -28,6 +28,8 @@ const router = (app) => {
     return userPage(req, res);
   });
   app.get('/account', requiresSecure, requiresLogin, userPage);
+
+  app.patch('/like/:id', requiresSecure, requiresLogin, likePost);
 };
 
 export default router;

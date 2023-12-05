@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import * as helper from './helper.js';
 
 const handleLogin = (e) => {
@@ -142,7 +142,9 @@ PostWindow.propTypes = {
   callback: () => null,
 };
 
-export const AllPosts = ({ posts, userId, ...rest }) => <div id='postsHolder' {...rest}>
+export const AllPosts = ({
+  posts, userId, likedPosts, callback, ...rest
+}) => <div id='postsHolder' {...rest}>
     {posts.filter((p) => {
       if (userId) {
         return p.user._id === userId;
@@ -156,8 +158,18 @@ export const AllPosts = ({ posts, userId, ...rest }) => <div id='postsHolder' {.
           <p>{d.toLocaleDateString('en-us')}</p>
         </div>
         <p className='postData'>{p.data}</p>
-        <div className='likButton'>
-          <FaRegHeart size={24} cursor='pointer' style={{ float: 'right' }} />
+        <div className='likes'>
+          <div className='likeButton' onClick={() => {
+            fetch(`/like/${p._id}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then(() => callback());
+          }}>
+            {likedPosts.findIndex((l) => l.toString() === p._id.toString()) === -1 ? <FaRegHeart size={20} color='var(--primary)' /> : <FaHeart size={20} color='var(--primary)' />}
+          </div>
+          <p>{p.likes}</p>
         </div>
       </div>;
     })}
@@ -166,4 +178,6 @@ export const AllPosts = ({ posts, userId, ...rest }) => <div id='postsHolder' {.
 AllPosts.propTypes = {
   posts: [],
   userId: '',
+  likedPosts: [],
+  callback: () => null,
 };

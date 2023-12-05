@@ -208,21 +208,23 @@ input:focus, textarea:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 700px;
+  width: 600px;
   border-radius: 8px;
   overflow-y: scroll;
   gap: 8px;
-  background-color: var(--beige);
+  background-color: #FFFFFF11;
   padding-top: 8px;
   padding-bottom: 8px;
+  padding: 8px 16px;
   margin-bottom: 32px;
+  overflow-x: hidden;
 }
 
 .postCard {
   background-color: var(--dark-beige);
   padding: 8px;
   border-radius: 8px;
-  width: 80%;
+  width: 100%;
   height: auto;
 }
 
@@ -244,9 +246,18 @@ input:focus, textarea:focus {
   word-wrap: break-word;
 }
 
+.likes {
+  display: flex;
+  float: right;
+  align-items: center;
+}
+
 .likeButton {
   aspect-ratio: 1;
   width: 16px;
+  cursor: pointer;
+  padding: 4px;
+  margin-right: 4px;
 }
 
 #errorHolder {

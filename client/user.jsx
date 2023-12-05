@@ -12,10 +12,14 @@ const loadPostsFromServer = async () => {
   const data = await response.json();
   console.log(window.location);
   if (window.location.pathname === '/account') {
-    postsRoot.render(<AllPosts posts={data.posts} userId={data.user._id} />);
+    postsRoot.render(<AllPosts
+      posts={data.posts}
+      userId={data.user._id}
+      callback={loadPostsFromServer}
+    />);
   } else {
     const id = window.location.pathname.split('/').at(-1);
-    postsRoot.render(<AllPosts posts={data.posts} userId={id} />);
+    postsRoot.render(<AllPosts posts={data.posts} userId={id} callback={loadPostsFromServer} />);
   }
   navRoot.render(<Nav isSignedIn={!!data.user} />);
   const postButton = document.getElementById('postButton');
