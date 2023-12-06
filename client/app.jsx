@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Nav from './nav.jsx';
-import { PostWindow, AllPosts } from './windows.jsx';
+import Nav from './components/nav.jsx';
+import { PostWindow, AllPosts } from './components/post.jsx';
 
 const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
 const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));

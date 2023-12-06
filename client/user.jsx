@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Nav from './nav.jsx';
-import { PostWindow, AllPosts } from './windows.jsx';
+import Nav from './components/nav.jsx';
+import { PostWindow, AllPosts } from './components/post.jsx';
+import UserInfo from './components/userInfo.jsx';
 
 const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
 const makePostRoot = ReactDOM.createRoot(document.getElementById('makePost'));
@@ -23,6 +24,7 @@ const loadPostsFromServer = async () => {
     likedPosts = userData.user.likedPosts;
   }
   if (window.location.pathname === '/account') {
+    userInfoRoot.render(<UserInfo userId={data.user._id} />);
     postsRoot.render(<AllPosts
       posts={data.posts}
       userId={data.user._id}
@@ -31,6 +33,7 @@ const loadPostsFromServer = async () => {
     />);
   } else {
     const id = window.location.pathname.split('/').at(-1);
+    userInfoRoot.render(<UserInfo userId={id} />);
     postsRoot.render(<AllPosts
       posts={data.posts}
       userId={id}
@@ -43,10 +46,7 @@ const loadPostsFromServer = async () => {
   postButton.style.disabled = !!data.user;
 };
 
-const UserInfo = () => <div>User Info</div>;
-
 const init = () => {
-  userInfoRoot.render(<UserInfo />);
   if (window.location.pathname === '/account') {
     makePostRoot.render(<PostWindow callback={loadPostsFromServer} />);
   } else {

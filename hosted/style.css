@@ -296,3 +296,15 @@ input:focus, textarea:focus {
   color: rgb(226, 34, 13);
   margin-top: 8px;
 }
+
+
+#user {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary);
+  align-items: flex-start;
+  padding: 8px;
+  margin-left: 16px;
+  border-radius: 8px;
+  width: 100%;
+}

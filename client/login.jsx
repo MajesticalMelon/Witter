@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Nav from './nav.jsx';
-import { LoginWindow, SignupWindow } from './windows.jsx';
+import Nav from './components/nav.jsx';
+import { LoginWindow, SignupWindow } from './components/auth.jsx';
 
 const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
 const formsRoot = ReactDOM.createRoot(document.getElementById('forms'));
