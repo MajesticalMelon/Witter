@@ -1,5 +1,15 @@
 import {
-  loginPage, login, signup, getPost, getUser, makePost, userPage, logout, likePost,
+  loginPage,
+  login,
+  signup,
+  getPost,
+  getUser,
+  makePost,
+  userPage,
+  logout,
+  likePost,
+  addFollowing,
+  getIsFollowing,
 } from './controllers/index.js';
 import { requiresLogin, requiresLogout, requiresSecure } from './middleware/index.js';
 
@@ -14,7 +24,7 @@ const router = (app) => {
 
   app.get('/witter', requiresSecure, (req, res) => res.render('app'));
 
-  app.get('/', requiresSecure, (req, res) => res.render('login'));
+  app.get('/', requiresSecure, (req, res) => res.render('app'));
 
   app.get('/posts', requiresSecure, getPost);
   app.get('/posts/:user', requiresSecure, getPost);
@@ -30,6 +40,8 @@ const router = (app) => {
   app.get('/account', requiresSecure, requiresLogin, userPage);
 
   app.patch('/like/:id', requiresSecure, requiresLogin, likePost);
+  app.patch('/follow/:id', requiresSecure, requiresLogin, addFollowing);
+  app.get('/follow/:id', requiresSecure, requiresLogin, getIsFollowing);
 };
 
 export default router;

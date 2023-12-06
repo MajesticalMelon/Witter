@@ -8,7 +8,7 @@ export const requiresLogin = (req, res, next) => {
 
 export const requiresLogout = (req, res, next) => {
   if (req.session.account) {
-    return res.redirect('/');
+    return res.redirect('/witter');
   }
 
   return next();

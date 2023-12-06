@@ -47,15 +47,19 @@ const AccountSchema = new mongoose.Schema({
   privacy: {
     type: String,
     required: true,
-    enum: ['public', 'friends', 'private'],
+    enum: ['public', 'friendly', 'private'],
   },
-  friends: [
+  following: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Account',
       required: false,
     },
   ],
+  description: {
+    type: String,
+    required: false,
+  },
 });
 
 // Converts a doc to something we can store in redis later on.

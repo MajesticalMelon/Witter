@@ -7,7 +7,7 @@ import UserInfo from './components/userInfo.jsx';
 const navRoot = ReactDOM.createRoot(document.getElementById('navContainer'));
 const makePostRoot = ReactDOM.createRoot(document.getElementById('makePost'));
 const postsRoot = ReactDOM.createRoot(document.getElementById('posts'));
-const userInfoRoot = ReactDOM.createRoot(document.getElementById('userInfo'));
+const userInfoRoot = ReactDOM.createRoot(document.getElementById('userInfoContainer'));
 
 const loadPostsFromServer = async () => {
   const response = await fetch('/posts');
@@ -42,8 +42,6 @@ const loadPostsFromServer = async () => {
     />);
   }
   navRoot.render(<Nav isSignedIn={!!data.user} />);
-  const postButton = document.getElementById('postButton');
-  postButton.style.disabled = !!data.user;
 };
 
 const init = () => {

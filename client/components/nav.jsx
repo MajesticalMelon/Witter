@@ -2,6 +2,14 @@ import * as React from 'react';
 import * as MdIcon from 'react-icons/md';
 
 const Nav = ({ isSignedIn }) => <div id="navBar"><a href="/witter"><img id="navLogo" src="/assets/img/witter.png" alt="Witter logo" /></a>
+  <div className="navlink">
+    <a id="homeButton" className="navButton" href="/witter">
+      <div id="homeIcon" className='navIcon'><MdIcon.MdHome/></div>
+      <div className="navText">
+        Home
+      </div>
+    </a>
+  </div>
   {!isSignedIn ? <div className="navlink">
     <a id="loginButton" className="navButton" href="/login">
       <div id="loginIcon" className='navIcon'><MdIcon.MdLogin/></div>

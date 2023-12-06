@@ -60,10 +60,38 @@ export const signup = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    const docs = await Account.findById(req.params.id);
+    const docs = await Account.findById(req.params.id).populate('following');
     return res.json({ user: docs });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Error retrieving user!' });
+  }
+};
+
+export const addFollowing = async (req, res) => {
+  try {
+    const docs = await Account.findById(req.session.account._id);
+    const followingIndex = docs.following.findIndex((f) => f.toString() === req.params.id);
+    if (followingIndex === -1) {
+      docs.following.push(req.params.id);
+    } else {
+      docs.following.splice(followingIndex, 1);
+    }
+    await docs.save();
+    return res.json({ following: docs.following });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Could not friend user!' });
+  }
+};
+
+export const getIsFollowing = async (req, res) => {
+  try {
+    const docs = await Account.findById(req.session.account._id);
+    const followIndex = docs.following.findIndex((f) => f.toString() === req.params.id);
+    return res.json({ isFollowing: followIndex !== -1 });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Not logged in!' });
   }
 };
