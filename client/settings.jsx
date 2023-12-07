@@ -39,7 +39,6 @@ const SettingsPage = () => {
         },
       ).then((response) => {
         response.json().then((json) => {
-          console.log(json);
           setCurrentUser(json.user);
           setPrivacyDescription(json.user.privacy);
         });

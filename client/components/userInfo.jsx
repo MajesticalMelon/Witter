@@ -104,8 +104,6 @@ const UserInfo = ({ userId }) => {
     }
   }, [user, isFollowing, isAllowed]);
 
-  console.log(account);
-
   if (!user) {
     return <>User could not be found!</>;
   }
