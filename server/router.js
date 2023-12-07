@@ -11,6 +11,7 @@ import {
   addFollowing,
   getIsFollowing,
   changePassword,
+  updateAccount,
 } from './controllers/index.js';
 import { requiresLogin, requiresLogout, requiresSecure } from './middleware/index.js';
 
@@ -47,6 +48,7 @@ const router = (app) => {
 
   app.get('/settings', requiresSecure, requiresLogin, (req, res) => res.render('settings'));
   app.patch('/password', requiresSecure, requiresLogin, changePassword);
+  app.patch('/account', requiresSecure, requiresLogin, updateAccount);
 };
 
 export default router;

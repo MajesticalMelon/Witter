@@ -27,7 +27,7 @@ export const PostWindow = ({ callback, ...rest }) => (
     {...rest}
   >
     <div className="mainInput postInput">
-      <textarea id="data" type="text" name="data" placeholder="data" />
+      <textarea id="data" type="text" name="data" placeholder="Put your thoughts here..." />
     </div>
 
     <input id="postButton" className="formSubmit mainInput" type="submit" value="Post" />

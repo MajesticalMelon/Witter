@@ -62,7 +62,7 @@ const UserInfo = ({ userId }) => {
   return <div id="userInfo">
     <h2>{user.username}</h2>
     <p id="userBio">
-      Welcome to my account!
+      {user.description === '' ? 'Welcome to my account!' : user.description}
     </p>
     <div id="followContainer">
       <div id="followTop"><p>Following:</p>{window.location.pathname === '/account'

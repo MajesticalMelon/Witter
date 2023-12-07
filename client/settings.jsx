@@ -39,6 +39,7 @@ const SettingsPage = () => {
         },
       ).then((response) => {
         response.json().then((json) => {
+          console.log(json);
           setCurrentUser(json.user);
           setPrivacyDescription(json.user.privacy);
         });
@@ -50,16 +51,19 @@ const SettingsPage = () => {
     <div id="settingsName">
       <h1>{currentUser?.username}</h1>
     </div>
+    <div id="settingsBio">
+      <textarea id="bio" type="text" name="bio" placeholder={'Tell us about yourself...'} defaultValue={currentUser?.description ?? ''} />
+    </div>
     <div id="settingsPrivacy">
       <div id="selectContainer">
         <label htmlFor="privacy">Privacy:</label>
         <div>
-          <select name="privacy" id='privacySelect' defaultValue={currentUser?.privacy} onChange={(e) => {
+          <select name="privacy" id='privacySelect' onChange={(e) => {
             setPrivacyDescription(e.target.value);
           }}>
-            <option value="public">public</option>
-            <option value="friendly">friendly</option>
-            <option value="private">private</option>
+            <option selected={currentUser?.privacy === 'public'} value="public">public</option>
+            <option selected={currentUser?.privacy === 'friendly'} value="friendly">friendly</option>
+            <option selected={currentUser?.privacy === 'private'} value="private">private</option>
           </select>
         </div>
       </div>
@@ -68,7 +72,25 @@ const SettingsPage = () => {
     <div id="settingsChange">
       <ChangeWindow></ChangeWindow>
     </div>
-    <button>Save Changes</button>
+    <button onClick={() => {
+      const bio = document.getElementById('bio').value;
+      const privacy = document.getElementById('privacySelect').value;
+      fetch(
+        '/account',
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ desc: bio, privacy }),
+        },
+      ).then((response) => {
+        response.json().then((json) => {
+          setCurrentUser(json.user);
+        });
+      });
+    }}>Save Changes</button>
     </div>;
 };
 

@@ -126,3 +126,23 @@ export const getIsFollowing = async (req, res) => {
     return res.status(500).json({ error: 'Not logged in!' });
   }
 };
+
+export const updateAccount = async (req, res) => {
+  try {
+    const docs = await Account.findById(req.session.account._id);
+
+    if (req.body.desc) {
+      docs.description = req.body.desc;
+    }
+
+    if (req.body.privacy) {
+      docs.privacy = req.body.privacy;
+    }
+    await docs.save();
+
+    return res.json({ user: docs });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Not logged in!' });
+  }
+};
