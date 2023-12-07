@@ -49,6 +49,8 @@ const router = (app) => {
   app.get('/settings', requiresSecure, requiresLogin, (req, res) => res.render('settings'));
   app.patch('/password', requiresSecure, requiresLogin, changePassword);
   app.patch('/account', requiresSecure, requiresLogin, updateAccount);
+
+  app.get('*', requiresSecure, (req, res) => res.render('badGateway'));
 };
 
 export default router;
