@@ -49,6 +49,13 @@ const AccountSchema = new mongoose.Schema({
     required: true,
     enum: ['public', 'friendly', 'private'],
   },
+  followedBy: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Account',
+      required: false,
+    },
+  ],
   following: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -60,6 +67,13 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  allowedUsers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Account',
+      required: false,
+    },
+  ],
 });
 
 // Converts a doc to something we can store in redis later on.
@@ -68,6 +82,11 @@ AccountSchema.statics.toAPI = (doc) => ({
   _id: doc._id,
   posts: doc.posts,
   likedPosts: doc.likedPosts,
+  privacy: doc.privacy,
+  followedBy: doc.followedBy,
+  following: doc.following,
+  description: doc.description,
+  allowedUsers: doc.allowedUsers,
 });
 
 // Helper function to hash a password

@@ -12,6 +12,9 @@ import {
   getIsFollowing,
   changePassword,
   updateAccount,
+  getIsAllowed,
+  addAllowed,
+  showUserPage,
 } from './controllers/index.js';
 import { requiresLogin, requiresLogout, requiresSecure } from './middleware/index.js';
 
@@ -34,17 +37,14 @@ const router = (app) => {
 
   app.get('/user', requiresSecure, requiresLogin, getUser);
   app.get('/user/:id', requiresSecure, getUser);
-  app.get('/users/:id', requiresSecure, (req, res) => {
-    if (req.session.account && req.params.id === req.session.account._id) {
-      return res.redirect('/account');
-    }
-    return userPage(req, res);
-  });
+  app.get('/users/:id', requiresSecure, showUserPage);
   app.get('/account', requiresSecure, requiresLogin, userPage);
 
   app.patch('/like/:id', requiresSecure, requiresLogin, likePost);
   app.patch('/follow/:id', requiresSecure, requiresLogin, addFollowing);
   app.get('/follow/:id', requiresSecure, requiresLogin, getIsFollowing);
+  app.patch('/allow/:id', requiresSecure, requiresLogin, addAllowed);
+  app.get('/allow/:id', requiresSecure, requiresLogin, getIsAllowed);
 
   app.get('/settings', requiresSecure, requiresLogin, (req, res) => res.render('settings'));
   app.patch('/password', requiresSecure, requiresLogin, changePassword);

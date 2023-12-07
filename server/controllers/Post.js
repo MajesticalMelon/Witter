@@ -30,11 +30,35 @@ export const getPost = async (req, res) => {
       query.owner = req.params.user;
     }
 
-    const docs = await Post.find(query).populate('user').select('user data createdDate likes').sort({ createdDate: -1 })
+    let posts = await Post.find(query).populate('user').select('user data createdDate likes').sort({ createdDate: -1 })
       .lean()
       .exec();
 
-    return res.json({ posts: docs, user: req.session.account });
+    if (req.session.account) {
+      posts = posts.filter((p) => {
+        if (p.user._id.toString() === req.session.account._id) {
+          return true;
+        }
+
+        if (p.user.privacy === 'friendly') {
+          return p.user.followedBy.findIndex(
+            (f) => f.toString() === req.session.account._id,
+          ) !== -1;
+        }
+
+        if (p.user.privacy === 'private') {
+          return p.user.allowedUsers.findIndex(
+            (f) => f.toString() === req.session.account._id,
+          ) !== -1;
+        }
+
+        return true;
+      });
+    } else {
+      posts = posts.filter((p) => p.user.privacy === 'public');
+    }
+
+    return res.json({ posts, user: req.session.account });
   } catch (err) {
     return res.status(500).json({ error: 'Error retrieving posts!' });
   }

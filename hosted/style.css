@@ -325,6 +325,13 @@ label {
   margin-bottom: 0px;
 }
 
+#userTop {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
 #userBio {
   margin-top: 8px;
   margin-bottom: 8px;
@@ -351,8 +358,7 @@ label {
   flex: 4;
 }
 
-#followButton {
-  flex: 1;
+.userButton {
   transition: background-color 0.4s ease;
   text-align: center;
   color: var(--secondary);
@@ -363,7 +369,7 @@ label {
   cursor: pointer;
 }
 
-#followButton:hover {
+.userButton:hover {
   transition: background-color 0.4s ease;
   background-color: var(--dark-beige);
 }
