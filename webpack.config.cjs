@@ -5,6 +5,7 @@ module.exports = {
     app: './client/app.jsx',
     login: './client/login.jsx',
     user: './client/user.jsx',
+    settings: '/client/settings.jsx',
   },
   target: ['web', 'es6'],
   module: {

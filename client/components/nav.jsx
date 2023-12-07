@@ -41,6 +41,14 @@ const Nav = ({ isSignedIn }) => <div id="navBar"><a href="/witter"><img id="navL
       </div>
     </a>
   </div> : <></>}
+  {isSignedIn ? <div className="navlink">
+    <a id="settingsButton" className="navButton" href="/settings">
+      <div id="settingsIcon" className='navIcon'><MdIcon.MdSettings/></div>
+      <div className="navText">
+        Settings
+      </div>
+    </a>
+  </div> : <></>}
 </div>;
 
 Nav.propTypes = {

@@ -12,6 +12,7 @@ export const sendPost = async (url, data, handler) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify(data),
   });

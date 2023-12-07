@@ -18,6 +18,7 @@ const loadPostsFromServer = async () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     });
     const userData = await userResponse.json();

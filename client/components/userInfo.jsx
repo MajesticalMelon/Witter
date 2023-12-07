@@ -9,7 +9,10 @@ const UserInfo = ({ userId }) => {
       `/follow/${userId}`,
       {
         method: 'GET',
-        headers: { Accept: 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
       },
     ).then((response) => {
       response.json().then((data) => {
@@ -24,7 +27,10 @@ const UserInfo = ({ userId }) => {
         `/user/${userId}`,
         {
           method: 'GET',
-          headers: { Accept: 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
         },
       ).then((response) => {
         response.json().then((data) => {
@@ -36,7 +42,10 @@ const UserInfo = ({ userId }) => {
         `/follow/${userId}`,
         {
           method: 'GET',
-          headers: { Accept: 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
         },
       ).then((response) => {
         response.json().then((data) => {
@@ -61,7 +70,13 @@ const UserInfo = ({ userId }) => {
       <div id="followTop"><p>Following:</p>{window.location.pathname === '/account'
         ? <></>
         : <div id="followButton" onClick={() => {
-          fetch(`/follow/${userId}`, { method: 'PATCH', headers: { Accept: 'application/json' } }).then(() => getIsFriend());
+          fetch(`/follow/${userId}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+          }).then(() => getIsFriend());
         }}>{isFollowing ? 'Unfollow' : 'Follow'}</div>}</div>
       <div id="followList">
         {user.following.length > 0

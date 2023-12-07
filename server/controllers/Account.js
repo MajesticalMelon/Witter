@@ -58,9 +58,40 @@ export const signup = async (req, res) => {
   }
 };
 
+export const changePassword = async (req, res) => {
+  try {
+    if (!req.body.oldPassword || !req.body.newPassword) {
+      return res.status(400).json({ error: 'All fields are required!' });
+    }
+
+    return Account.authenticate(
+      req.session.account.username,
+      req.body.oldPassword,
+      async (err, account) => {
+        if (err || !account) {
+          return res.status(400).json({ error: 'Wrong username or password!' });
+        }
+
+        const user = await Account.findById(req.session.account._id);
+        user.password = await Account.generateHash(req.body.newPassword);
+        await user.save();
+
+        return res.json({ redirect: '/settings' });
+      },
+    );
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
+  }
+};
+
 export const getUser = async (req, res) => {
   try {
-    const docs = await Account.findById(req.params.id).populate('following');
+    if (req.params.id) {
+      const docs = await Account.findById(req.params.id).populate('following');
+      return res.json({ user: docs });
+    }
+    const docs = await Account.findById(req.session.account._id).populate('following');
     return res.json({ user: docs });
   } catch (err) {
     console.log(err);

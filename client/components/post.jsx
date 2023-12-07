@@ -64,6 +64,7 @@ export const AllPosts = ({
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
+                Accept: 'application/json',
               },
             }).then(() => callback());
           }}>
