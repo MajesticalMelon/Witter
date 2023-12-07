@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom';
 import Nav from './components/nav.jsx';
+import { ChangeWindow } from './components/auth.jsx';
 
 const navRoot = createRoot(document.getElementById('navContainer'));
 const settingsRoot = createRoot(document.getElementById('settingsContainer'));
@@ -27,24 +28,7 @@ const SettingsPage = () => {
     }
   }, [currentUser]);
 
-  return <div onClick={() => {
-    fetch(
-      '/password',
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          oldPassword: 'New',
-          newPassword: 'ahhh',
-        }),
-      },
-    ).then((response) => {
-      console.log(response);
-    });
-  }}>AHHHHHHH</div>;
+  return <div><ChangeWindow></ChangeWindow></div>;
 };
 
 const init = () => {

@@ -69,7 +69,7 @@ export const changePassword = async (req, res) => {
       req.body.oldPassword,
       async (err, account) => {
         if (err || !account) {
-          return res.status(400).json({ error: 'Wrong username or password!' });
+          return res.status(400).json({ error: 'Wrong password or passwords do not match!' });
         }
 
         const user = await Account.findById(req.session.account._id);

@@ -59,8 +59,6 @@ const UserInfo = ({ userId }) => {
     return <>User could not be found!</>;
   }
 
-  console.log(user.following);
-
   return <div id="userInfo">
     <h2>{user.username}</h2>
     <p id="userBio">
