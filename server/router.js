@@ -15,6 +15,7 @@ import {
   getIsAllowed,
   addAllowed,
   showUserPage,
+  getIsPremium,
 } from './controllers/index.js';
 import { requiresLogin, requiresLogout, requiresSecure } from './middleware/index.js';
 
@@ -51,6 +52,7 @@ const router = (app) => {
   app.patch('/account', requiresSecure, requiresLogin, updateAccount);
 
   app.get('*', requiresSecure, (req, res) => res.render('badGateway'));
+  app.get('/premium', requiresSecure, requiresLogin, getIsPremium)
 };
 
 export default router;

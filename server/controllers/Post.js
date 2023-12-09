@@ -24,7 +24,7 @@ export const makePost = async (req, res) => {
 
 export const getPost = async (req, res) => {
   try {
-    const query = { };
+    const query = {};
 
     if (req.params.user) {
       query.owner = req.params.user;

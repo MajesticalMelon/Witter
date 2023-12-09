@@ -6,6 +6,29 @@ const UserInfo = ({ userId }) => {
   const [isFollowing, setIsFollowing] = React.useState(undefined);
   const [isAllowed, setIsAllowed] = React.useState(undefined);
 
+  const [quote, setQuote] = React.useState('');
+
+  React.useEffect(() => {
+    if (quote === '') {
+      fetch(
+        "https://type.fit/api/quotes",
+        {
+          method: 'GET',
+          headers: {
+            'Cross-Origin': 'anonymous',
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        }
+      ).then((response) => {
+        response.json().then((json) => {
+          const randIndex = Math.floor(Math.random() * json.length);
+          setQuote(json[randIndex].text);
+        })
+      })
+    }
+  }, [quote])
+
   const getIsFriend = React.useCallback(() => {
     fetch(
       `/follow/${userId}`,
@@ -108,42 +131,49 @@ const UserInfo = ({ userId }) => {
     return <>User could not be found!</>;
   }
 
-  return <div id="userInfo">
-    <div id="userTop">
-      <h2>{user.username}</h2>
-      {
-      account?.privacy === 'private'
-        ? <div id="allowButton" className='userButton' onClick={() => {
-          fetch(`/allow/${userId}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-            },
-          }).then(() => getIsAllowed());
-        }}>{isAllowed ? 'Block' : 'Allow'}</div> : <></>
-      }
-    </div>
-    <p id="userBio">
-      {user.description === '' ? 'Welcome to my account!' : user.description}
-    </p>
-    <div id="followContainer">
-      <div id="followTop"><p>Following:</p>{window.location.pathname === '/account'
-        ? <></>
-        : <div id="followButton" className='userButton' onClick={() => {
-          fetch(`/follow/${userId}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-            },
-          }).then(() => getIsFriend());
-        }}>{isFollowing ? 'Unfollow' : 'Follow'}</div>}</div>
-      <div id="followList">
-        {user.following.length > 0
-          ? user.following.map((f, i) => <a className='userLink followLink' href={`/users/${userId}`} key={i}>@{f.username}</a>)
-          : 'None'}
+  return <div id="infoWithAd">
+    <div id="userInfo">
+      <div id="userTop">
+        <h2>{user.username}</h2>
+        {
+          account?.privacy === 'private'
+            ? <div id="allowButton" className='userButton' onClick={() => {
+              fetch(`/allow/${userId}`, {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json',
+                },
+              }).then(() => getIsAllowed());
+            }}>{isAllowed ? 'Block' : 'Allow'}</div> : <></>
+        }
       </div>
+      <p id="userBio">
+        {user.description === '' ? 'Welcome to my account!' : user.description}
+      </p>
+      <div id="followContainer">
+        <div id="followTop"><p>Following:</p>{window.location.pathname === '/account'
+          ? <></>
+          : <div id="followButton" className='userButton' onClick={() => {
+            fetch(`/follow/${userId}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+            }).then(() => getIsFriend());
+          }}>{isFollowing ? 'Unfollow' : 'Follow'}</div>}</div>
+        <div id="followList">
+          {user.following.length > 0
+            ? user.following.map((f, i) => <a className='userLink followLink' href={`/users/${userId}`} key={i}>@{f.username}</a>)
+            : 'None'}
+        </div>
+      </div>
+    </div>
+
+    <div className="advertisement">
+      <img src='https://picsum.photos/1000/2000?random=2' crossOrigin='anonymous'></img>
+      <p>{quote}</p>
     </div>
   </div>;
 };

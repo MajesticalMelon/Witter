@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
-html, body {
+html,
+body {
   height: 100vh;
   width: 100vw;
   margin: 0;
@@ -24,7 +25,10 @@ body {
   display: flex;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   border-radius: 5px;
   font-size: 1.1rem;
   padding: 2px;
@@ -32,12 +36,16 @@ input, button, textarea, select {
   font-family: 'Nanum Gothic', sans-serif;
 }
 
-#user, #pass, #pass2 {
+#user,
+#pass,
+#pass2 {
   text-align: center;
   width: 180px;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
   box-shadow: 0px 0px 1px 1px var(--primary);
 }
@@ -96,7 +104,11 @@ input:focus, textarea:focus, select:focus {
   width: 30px;
 }
 
-.navButton, .navButton:link, .navButton:visited, .navButton:hover, .navButton:active {
+.navButton,
+.navButton:link,
+.navButton:visited,
+.navButton:hover,
+.navButton:active {
   display: flex;
   align-items: center;
   height: 24px;
@@ -158,7 +170,8 @@ label {
   text-align: center;
 }
 
-.formSubmit, button {
+.formSubmit,
+button {
   transition: background-color 0.4s ease;
   display: block;
   text-align: center;
@@ -172,11 +185,17 @@ label {
   width: auto;
 }
 
-.formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active, button:hover, button:active {
+.formSubmit:link,
+.formSubmit:visited,
+.formSubmit:hover,
+.formSubmit:active,
+button:hover,
+button:active {
   color: var(--secondary);
 }
 
-.formSubmit:hover, button:hover {
+.formSubmit:hover,
+button:hover {
   transition: background-color 0.4s ease;
   background-color: var(--dark-beige);
 }
@@ -194,6 +213,7 @@ label {
   width: calc(100% - 60px);
   display: grid;
   grid-template-columns: 1fr 600px 1fr;
+  grid-template-rows: 100%;
   margin: 16px;
   margin-left: 76px;
   gap: 16px;
@@ -201,10 +221,12 @@ label {
 }
 
 #makePost {
-  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
   background-color: var(--dark-beige);
   padding: 8px;
   border-radius: 6px;
+  margin-bottom: 16px;
 }
 
 #makePost .postInput {
@@ -216,6 +238,45 @@ label {
   display: flex;
   width: 100%;
   height: 100px;
+}
+
+#postWindowContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  justify-content: flex-start;
+  overflow: hidden;
+  margin-bottom: -16px;
+}
+
+.advertisement {
+  position: relative;
+  display: flex;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.advertisement img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.advertisement p {
+  position: absolute;
+  top: 32px;
+  text-align: center;
+  margin-left: 48px;
+  margin-right: 48px;
+  background-color: #55473daa;
+  padding: 8px;
+  border-radius: 6px;
 }
 
 #posts {
@@ -252,7 +313,11 @@ label {
   height: auto;
 }
 
-.userLink, .userLink:link, .userLink:visited, .userLink:hover, .userLink:active {
+.userLink,
+.userLink:link,
+.userLink:visited,
+.userLink:hover,
+.userLink:active {
   color: var(--secondary);
 }
 
@@ -261,7 +326,8 @@ label {
   align-items: flex-end;
 }
 
-.postTitle .username, p {
+.postTitle .username,
+p {
   margin: 0;
 }
 
@@ -307,7 +373,10 @@ label {
 }
 
 #userInfoContainer {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
 }
 
 #userInfo {
@@ -317,7 +386,6 @@ label {
   align-items: flex-start;
   padding: 8px;
   border-radius: 8px;
-  flex: 1;
 }
 
 #userInfo h2 {
@@ -406,6 +474,9 @@ label {
   margin: 0;
   font-size: 48pt;
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #settingsBio {
@@ -462,11 +533,22 @@ label {
   border-bottom: 1px solid var(--secondary);
 }
 
+#settingsPremium {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--secondary);
+}
+
 #bad {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   width: 100%;
   height: 50%;
 }
@@ -475,4 +557,22 @@ label {
   font-size: 18pt;
   width: 60%;
   text-align: center;
+}
+
+#infoAdContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+#infoWithAd {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  gap: 8px;
 }

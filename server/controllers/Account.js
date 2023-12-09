@@ -177,17 +177,25 @@ export const addAllowed = async (req, res) => {
 };
 
 export const getIsFollowing = async (req, res) => {
+  if (!req.session.account) {
+    return res.status(500).json({ error: 'Not logged in!' });
+  }
+
   try {
     const docs = req.session.account;
     const followIndex = docs.following.findIndex((f) => f.toString() === req.params.id);
     return res.json({ isFollowing: followIndex !== -1 });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: 'Not logged in!' });
+    v
   }
 };
 
 export const getIsAllowed = async (req, res) => {
+  if (!req.session.account) {
+    return res.status(500).json({ error: 'Not logged in!' });
+  }
+
   try {
     const docs = req.session.account;
     const allowIndex = docs.allowedUsers.findIndex((f) => f.toString() === req.params.id);
@@ -202,6 +210,10 @@ export const updateAccount = async (req, res) => {
   try {
     const docs = await Account.findById(req.session.account._id);
 
+    if (req.body.premium) {
+      docs.premium = req.body.premium;
+    }
+
     if (req.body.desc) {
       docs.description = req.body.desc;
     }
@@ -213,6 +225,20 @@ export const updateAccount = async (req, res) => {
     req.session.account = Account.toAPI(docs);
 
     return res.json({ user: docs });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Not logged in!' });
+  }
+};
+
+export const getIsPremium = async (req, res) => {
+  if (!req.session.account) {
+    return res.status(500).json({ error: 'Not logged in!' });
+  }
+
+  try {
+    const docs = req.session.account;
+    return res.json({ isPremium: docs.premium });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Not logged in!' });

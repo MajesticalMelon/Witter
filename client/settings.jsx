@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom';
 import Nav from './components/nav.jsx';
 import { ChangeWindow } from './components/auth.jsx';
+import { MdStar } from 'react-icons/md';
 
 const navRoot = createRoot(document.getElementById('navContainer'));
 const settingsRoot = createRoot(document.getElementById('settingsContainer'));
@@ -48,7 +49,7 @@ const SettingsPage = () => {
 
   return <div id="settings">
     <div id="settingsName">
-      <h1>{currentUser?.username}</h1>
+      <h1>{currentUser?.username} {currentUser?.premium ? <MdStar size={36} color='var(--primary)' /> : <></>}</h1>
     </div>
     <div id="settingsBio">
       <textarea id="bio" type="text" name="bio" placeholder={'Tell us about yourself...'} defaultValue={currentUser?.description ?? ''} />
@@ -71,6 +72,26 @@ const SettingsPage = () => {
     <div id="settingsChange">
       <ChangeWindow></ChangeWindow>
     </div>
+    <div id="settingsPremium">
+      <button onClick={() => {
+        fetch(
+          '/account',
+          {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({ premium: !currentUser?.premium ?? false }),
+          },
+        ).then((response) => {
+          response.json().then((json) => {
+            setCurrentUser(json.user);
+          });
+        });
+      }}>{currentUser?.premium ? 'Unsubscribe from Premium' : 'Subscribe to Premium'}</button>
+      <p>Premium gets rid of all advertisements</p>
+    </div>
     <button onClick={() => {
       const bio = document.getElementById('bio').value;
       const privacy = document.getElementById('privacySelect').value;
@@ -90,7 +111,7 @@ const SettingsPage = () => {
         });
       });
     }}>Save Changes</button>
-    </div>;
+  </div>;
 };
 
 const init = () => {

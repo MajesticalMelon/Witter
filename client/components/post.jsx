@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import * as helper from '../helper.js';
 
@@ -16,27 +16,56 @@ const handlePost = (e, callback) => {
   return false;
 };
 
-export const PostWindow = ({ callback, ...rest }) => (
-  <form
-    id="postForm"
-    name="postForm"
-    onSubmit={(e) => handlePost(e, callback)}
-    action="/post"
-    method="POST"
-    className='mainForm'
-    {...rest}
-  >
-    <div className="mainInput postInput">
-      <textarea id="data" type="text" name="data" placeholder="Put your thoughts here..." />
-    </div>
+export const PostWindow = ({ callback, ...rest }) => {
+  const [quote, setQuote] = useState('');
 
-    <input id="postButton" className="formSubmit mainInput" type="submit" value="Post" />
+  useEffect(() => {
+    if (quote === '') {
+      fetch(
+        "https://type.fit/api/quotes",
+        {
+          method: 'GET',
+          headers: {
+            'Cross-Origin': 'anonymous',
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        }
+      ).then((response) => {
+        response.json().then((json) => {
+          const randIndex = Math.floor(Math.random() * json.length);
+          setQuote(json[randIndex].text);
+        })
+      })
+    }
+  }, [quote])
 
-    <div id="errorHolder">
-      <p id="errorMessage"></p>
+  return <div id="postWindowContainer">
+    <form
+      id="postForm"
+      name="postForm"
+      onSubmit={(e) => handlePost(e, callback)}
+      action="/post"
+      method="POST"
+      className='mainForm'
+      {...rest}
+    >
+      <div className="mainInput postInput">
+        <textarea id="data" type="text" name="data" placeholder="Put your thoughts here..." />
+      </div>
+
+      <input id="postButton" className="formSubmit mainInput" type="submit" value="Post" />
+
+      <div id="errorHolder">
+        <p id="errorMessage"></p>
+      </div>
+    </form>
+    <div className="advertisement">
+      <img src='https://picsum.photos/1000/1200' crossOrigin='anonymous'></img>
+      <p>{quote}</p>
     </div>
-  </form>
-);
+  </div>
+};
 
 PostWindow.propTypes = {
   callback: () => null,
