@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { MdStar } from 'react-icons/md';
 
 const UserInfo = ({ userId }) => {
   const [account, setAccount] = React.useState(undefined);
@@ -134,7 +135,7 @@ const UserInfo = ({ userId }) => {
   return <div id="infoWithAd">
     <div id="userInfo">
       <div id="userTop">
-        <h2>{user.username}</h2>
+        <h2>{user.username} {user.premium ? <MdStar /> : <></>}</h2>
         {
           account?.privacy === 'private'
             ? <div id="allowButton" className='userButton' onClick={() => {
@@ -171,7 +172,7 @@ const UserInfo = ({ userId }) => {
       </div>
     </div>
 
-    <div className="advertisement">
+    <div className="advertisement" style={{ display: account?.premium ? 'none' : 'flex' }}>
       <img src='https://picsum.photos/1000/2000?random=2' crossOrigin='anonymous'></img>
       <p>{quote}</p>
     </div>

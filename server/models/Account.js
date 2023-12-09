@@ -91,6 +91,7 @@ AccountSchema.statics.toAPI = (doc) => ({
   following: doc.following,
   description: doc.description,
   allowedUsers: doc.allowedUsers,
+  premium: doc.premium,
 });
 
 // Helper function to hash a password

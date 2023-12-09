@@ -40,6 +40,7 @@ const loadPostsFromServer = async () => {
 };
 
 const Ad = () => {
+  const [premium, setPremium] = useState(false);
   const [quote, setQuote] = useState('');
 
   useEffect(() => {
@@ -59,12 +60,28 @@ const Ad = () => {
           const randIndex = Math.floor(Math.random() * json.length);
           setQuote(json[randIndex].text);
         })
-      })
+      });
+
+      fetch(
+        '/premium',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        },
+      ).then((response) => {
+        response.json().then((data) => {
+          setPremium(data.isPremium);
+        });
+      });
     }
-  }, [quote])
+  }, [quote, premium])
+
 
   return <div id="infoAdContainer">
-    <div className="advertisement">
+    <div className="advertisement" style={{ display: premium ? 'none' : 'flex' }}>
       <img src='https://picsum.photos/1000/2000?random=2' crossOrigin='anonymous'></img>
       <p>{quote}</p>
     </div>

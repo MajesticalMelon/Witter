@@ -210,7 +210,7 @@ export const updateAccount = async (req, res) => {
   try {
     const docs = await Account.findById(req.session.account._id);
 
-    if (req.body.premium) {
+    if (req.body.premium !== undefined) {
       docs.premium = req.body.premium;
     }
 
@@ -238,7 +238,7 @@ export const getIsPremium = async (req, res) => {
 
   try {
     const docs = req.session.account;
-    return res.json({ isPremium: docs.premium });
+    return res.json({ isPremium: !!docs.premium });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Not logged in!' });

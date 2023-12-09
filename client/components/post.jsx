@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { MdStar } from 'react-icons/md';
 import * as helper from '../helper.js';
 
 const handlePost = (e, callback) => {
@@ -17,6 +18,7 @@ const handlePost = (e, callback) => {
 };
 
 export const PostWindow = ({ callback, ...rest }) => {
+  const [premium, setPremium] = useState(false);
   const [quote, setQuote] = useState('');
 
   useEffect(() => {
@@ -36,11 +38,26 @@ export const PostWindow = ({ callback, ...rest }) => {
           const randIndex = Math.floor(Math.random() * json.length);
           setQuote(json[randIndex].text);
         })
-      })
-    }
-  }, [quote])
+      });
 
-  return <div id="postWindowContainer">
+      fetch(
+        '/premium',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        },
+      ).then((response) => {
+        response.json().then((data) => {
+          setPremium(data.isPremium);
+        });
+      });
+    }
+  }, [quote, premium])
+
+  return <div id="postWindowContainer" style={{ marginBottom: premium ? '-16px' : 'auto' }}>
     <form
       id="postForm"
       name="postForm"
@@ -60,7 +77,7 @@ export const PostWindow = ({ callback, ...rest }) => {
         <p id="errorMessage"></p>
       </div>
     </form>
-    <div className="advertisement">
+    <div className="advertisement" style={{ display: premium ? 'none' : 'flex' }}>
       <img src='https://picsum.photos/1000/1200' crossOrigin='anonymous'></img>
       <p>{quote}</p>
     </div>
@@ -83,7 +100,7 @@ export const AllPosts = ({
       const d = new Date(p.createdDate);
       return <div key={i} className='postCard'>
         <div className='postTitle'>
-          <a className='userLink' href={`/users/${p.user._id}`}><p className='username'>@{p.user.username}</p></a>
+          <a className='userLink' href={`/users/${p.user._id}`}><p className='username'>@{p.user.username} {p.user.premium ? <MdStar color='var(--primary)' /> : <></>}</p></a>
           <p>{d.toLocaleDateString('en-us')}</p>
         </div>
         <p className='postData'>{p.data}</p>

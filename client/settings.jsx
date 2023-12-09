@@ -40,12 +40,14 @@ const SettingsPage = () => {
         },
       ).then((response) => {
         response.json().then((json) => {
+          console.log(json);
           setCurrentUser(json.user);
           setPrivacyDescription(json.user.privacy);
         });
       });
     }
   }, [currentUser]);
+
 
   return <div id="settings">
     <div id="settingsName">
@@ -82,7 +84,7 @@ const SettingsPage = () => {
               'Content-Type': 'application/json',
               Accept: 'application/json',
             },
-            body: JSON.stringify({ premium: !currentUser?.premium ?? false }),
+            body: JSON.stringify({ premium: !(currentUser?.premium) ?? false }),
           },
         ).then((response) => {
           response.json().then((json) => {
