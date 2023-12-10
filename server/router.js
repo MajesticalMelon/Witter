@@ -52,6 +52,8 @@ const router = (app) => {
   app.patch('/account', requiresSecure, requiresLogin, updateAccount);
   app.get('/premium', requiresSecure, requiresLogin, getIsPremium)
 
+  app.get('/credits', requiresSecure, (req, res) => res.render('credits'));
+
 
   app.get('*', requiresSecure, (req, res) => res.render('badGateway'));
 };

@@ -59,9 +59,9 @@ select:focus {
   background-color: var(--primary);
   overflow-x: hidden;
   border-right: var(--dark-beige) 2px solid;
-  align-items: flex-start;
+  align-items: flex;
   transition: all 0.3s;
-  padding-left: 8px;
+  padding-left: 12px;
   z-index: 10;
 }
 
@@ -84,7 +84,7 @@ select:focus {
 }
 
 #navBar:hover {
-  width: 150px;
+  width: 140px;
 
   & .navlink {
     width: auto;
@@ -102,6 +102,12 @@ select:focus {
   padding: 4px;
   white-space: nowrap;
   width: 30px;
+  margin-right: auto;
+}
+
+.navBottom {
+  margin-top: auto;
+  margin-bottom: 8px;
 }
 
 .navButton,
@@ -584,7 +590,7 @@ p {
   flex-direction: column;
   height: 100%;
   width: 100%;
-  gap: 8px;
+  gap: 16px;
 }
 
 img {
@@ -592,4 +598,18 @@ img {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 5%;
+}
+
+body:has(#credits) {
+  display: flex;
+  justify-content: center;
+}
+
+#credits {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  gap: 8px;
+  margin-top: 128px;
 }

@@ -150,7 +150,7 @@ const UserInfo = ({ userId }) => {
         }
       </div>
       <p id="userBio">
-        {user.description === '' ? 'Welcome to my account!' : user.description}
+        {user.description === '' || !user.description ? 'Welcome to my account!' : user.description}
       </p>
       <div id="followContainer">
         <div id="followTop"><p>Following:</p>{window.location.pathname === '/account'

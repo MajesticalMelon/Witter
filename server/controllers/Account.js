@@ -214,11 +214,11 @@ export const updateAccount = async (req, res) => {
       docs.premium = req.body.premium;
     }
 
-    if (req.body.desc) {
+    if (req.body.desc !== undefined) {
       docs.description = req.body.desc;
     }
 
-    if (req.body.privacy) {
+    if (req.body.privacy !== undefined) {
       docs.privacy = req.body.privacy;
     }
     await docs.save();
