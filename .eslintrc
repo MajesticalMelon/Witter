@@ -1,11 +1,27 @@
-{ 
-  "extends": ["plugin:react/recommended", "airbnb/base"],
+{
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb/base"
+  ],
+  "plugins": [
+    "react"
+  ],
   "rules": {
-    "no-underscore-dangle" : "off",
+    "no-underscore-dangle": "off",
     "no-plusplus": "off",
     "import/extensions": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   },
-  "env": {"browser": true, "es6": true},
-  "parser": "@babel/eslint-parser"
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
 }

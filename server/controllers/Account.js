@@ -82,7 +82,6 @@ export const signup = async (req, res) => {
     req.session.account = Account.toAPI(newAccount);
     return res.json({ redirect: '/witter' });
   } catch (err) {
-    console.log(err);
     if (err.code === 11000) {
       return res.status(400).json({ error: 'Username already in use!' });
     }
@@ -114,7 +113,6 @@ export const changePassword = async (req, res) => {
       },
     );
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: err });
   }
 };
@@ -128,7 +126,6 @@ export const getUser = async (req, res) => {
     const docs = await Account.findById(req.session.account._id).populate('following');
     return res.json({ user: docs });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: 'Error retrieving user!' });
   }
 };
@@ -153,7 +150,6 @@ export const addFollowing = async (req, res) => {
     req.session.account = Account.toAPI(docs);
     return res.json({ following: docs.following });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: 'Could not friend user!' });
   }
 };
@@ -171,7 +167,6 @@ export const addAllowed = async (req, res) => {
     req.session.account = Account.toAPI(docs);
     return res.json({ allowed: docs.allowedUsers });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: 'Could not friend user!' });
   }
 };
@@ -186,8 +181,7 @@ export const getIsFollowing = async (req, res) => {
     const followIndex = docs.following.findIndex((f) => f.toString() === req.params.id);
     return res.json({ isFollowing: followIndex !== -1 });
   } catch (err) {
-    console.log(err);
-    v
+    return res.status(500).json({ error: err });
   }
 };
 
@@ -201,7 +195,6 @@ export const getIsAllowed = async (req, res) => {
     const allowIndex = docs.allowedUsers.findIndex((f) => f.toString() === req.params.id);
     return res.json({ isAllowed: allowIndex !== -1 });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: 'Not logged in!' });
   }
 };
@@ -226,7 +219,6 @@ export const updateAccount = async (req, res) => {
 
     return res.json({ user: docs });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: 'Not logged in!' });
   }
 };
@@ -240,7 +232,6 @@ export const getIsPremium = async (req, res) => {
     const docs = req.session.account;
     return res.json({ isPremium: !!docs.premium });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: 'Not logged in!' });
   }
 };

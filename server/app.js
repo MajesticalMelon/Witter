@@ -40,10 +40,10 @@ redisClient.connect().then(() => {
   app.use(helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
-      "img-src": ["'self'", "https: data: blob:"],
-      "connect-src": ["'self'", "https: data: blob:"],
+      'img-src': ["'self'", 'https: data: blob:'],
+      'connect-src': ["'self'", 'https: data: blob:'],
     },
-  }))
+  }));
   app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted`)));
   app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
   app.use(compression());
