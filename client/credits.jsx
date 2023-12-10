@@ -16,10 +16,12 @@ window.onload = () => {
     },
   ).then((response) => {
     response.json().then((data) => {
-      navRoot.render(<Nav isSignedIn={!!data.user}></Nav>)
+      navRoot.render(<Nav isSignedIn={!!data.user}></Nav>);
+    }).catch(() => {
+      navRoot.render(<Nav isSignedIn={false}></Nav>);
     });
-  }).catch((err) => {
-    navRoot.render(<Nav isSignedIn={false}></Nav>)
+  }).catch(() => {
+    navRoot.render(<Nav isSignedIn={false}></Nav>);
   });
 
 }
