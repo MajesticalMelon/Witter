@@ -600,7 +600,8 @@ img {
   background-size: 5%;
 }
 
-body:has(#credits) {
+#creditsContainer {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
